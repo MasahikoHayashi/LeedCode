@@ -1,0 +1,18 @@
+new = []
+        while nums1 and nums2:
+            if nums1[0] >= nums2[0]:
+                new.append(nums2.pop(0))
+            elif nums2[0] > nums1[0]:
+                new.append(nums1.pop(0))
+        while nums1 and not nums2:
+            new.append(nums1.pop(0))
+        while nums2 and not nums1:
+            new.append(nums2.pop(0))
+        
+        modulo = len(new) % 2
+        if modulo == 1:
+            return new[len(new)//2]
+        elif modulo == 0:
+            even =float(new[len(new)/2 - 1]+ new[len(new)/2])/2
+            return even
+
