@@ -1,0 +1,20 @@
+class Solution(object):
+    def reverse(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        INT_MAX = 2**31 - 1
+        
+
+        s = str(x)
+        if s[0] == "-":
+            result = s[1:len(s)][::-1]
+            if int(result) > INT_MAX:
+                return 0
+            return -int(result)
+        else:
+            result = s[::-1]
+            if int(result) > INT_MAX:
+                return 0
+            return int(result)
