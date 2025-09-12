@@ -1,0 +1,28 @@
+class Solution(object):
+    def convert(self, s, numRows):
+        """
+        :type s: str
+        :type numRows: int
+        :rtype: str
+        """
+        if numRows == 1 or len(s) <= numRows:
+            return s
+        
+        keys = range(0,numRows)
+        my_dict = dict.fromkeys(keys,"")
+        for index,word in enumerate(s):
+            if numRows == 2:
+                if index % 2 == 1:
+                    my_dict[1] += word
+                else:
+                    my_dict[0] += word
+            else:
+                cycle = (numRows-1)*2
+                cycle_index = index % cycle
+                if (numRows-1) >= cycle_index:
+                    my_dict[cycle_index] += word               
+                else:
+                    my_dict[cycle - cycle_index] += word           
+        values = my_dict.values()
+        result = "".join(values)
+        return result
