@@ -1,0 +1,33 @@
+dummy = ListNode(0)
+        dummy.next = head
+        
+        prev = dummy
+        
+        while prev.next:
+            # k個のノードがあるか確認し、グループの終点を見つける
+            end = prev
+            for _ in range(k):
+                end = end.next
+                if not end:
+                    return dummy.next
+            
+            # グループの開始点と次のグループの開始点を保持
+            start = prev.next
+            next_group = end.next
+            
+            # 3つのポインタを使ってグループを反転させる
+            prev_node = end.next  # 反転後の最初のノード（次のグループの開始点）
+            curr = start
+            
+            while curr != next_group:
+                next_node = curr.next
+                curr.next = prev_node
+                prev_node = curr
+                curr = next_node
+            
+            # 反転したグループを元のリストに再接続
+            prev.next = end       # 前のグループの末尾を、反転後のグループの先頭に繋ぐ
+            start.next = next_group # 反転前のグループの先頭を、次のグループに繋ぐ
+            prev = start          # prevを次のグループの直前の位置に移動させる
+        
+        return dummy.next
