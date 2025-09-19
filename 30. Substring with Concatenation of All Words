@@ -1,0 +1,36 @@
+class Solution(object):
+    def findSubstring(self, s, words):
+        """
+        :type s: str
+        :type words: List[str]
+        :rtype: List[int]
+        """
+        word_box = {}
+        for word in words:
+            word_box[word] = word_box.get(word,0)+1
+        word_count = len(words[0])
+        words_count = len(words)
+        words_sum = word_count * words_count
+        try_count = len(s) - words_sum +1
+
+        result = []
+        if try_count < 0:
+            return result
+        for i in range(try_count):
+            copy_box = dict(word_box)
+            j = i
+            match_count = 0
+            while match_count < words_count:
+                sub_words = s[j:j+word_count]
+                if sub_words in copy_box and copy_box[sub_words] > 0:
+                    j += word_count
+                    match_count += 1
+                    copy_box[sub_words] -= 1
+                else:
+                    break
+            if match_count == words_count:
+                result.append(i)
+        return result
+
+
+        
